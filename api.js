@@ -1,3 +1,5 @@
+const { get } = require("http");    
+
 async function getData(url) {
   try {
     const response = await fetch(url);
@@ -82,6 +84,7 @@ async function getCard(){
                     formatData(card);
                 } catch (error) {
                     console.error("Failed to fetch card:", error);
+                    getCard(); // Retry fetching a card
                 }
                 break;
 
@@ -97,6 +100,7 @@ async function getCard(){
                     formatData(card);
                 }catch (error) {
                     console.error("Failed to fetch card:", error);
+                    getCard();
                 }
                 break;
             case 2://Promo
@@ -109,26 +113,8 @@ async function getCard(){
                     formatData(card);
                 }catch (error) {
                     console.error("Failed to fetch card:", error);
+                    getCard();
                 }
                 break;
     }
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
-function numberFormat(nb){
-    if (nb <10){
-        return "00"+nb;
-    }
-    else if(nb<100){
-       return "0"+nb; 
-    }
-    else{
-        return nb;
-    }
-
-
-
 }
